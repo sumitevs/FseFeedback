@@ -1,0 +1,90 @@
+﻿<Window x:Class="FseFeedback.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FseFeedback"
+        xmlns:viewmodel="clr-namespace:FseFeedback.ViewModel"
+        mc:Ignorable="d"
+        Title="Feedback" Height="450" Width="800"
+        AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="DragMe">
+    <Window.Resources>
+        <viewmodel:ViewModel x:Key="vm"></viewmodel:ViewModel>
+    </Window.Resources>
+        <Grid Background="#23262b">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Activity" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBox HorizontalAlignment="Center" 
+                      VerticalAlignment="Center" Width="150" 
+                      ItemsSource="{Binding Path=PscActivities}"
+                      SelectedItem="{Binding Path=SelectedActivity}"
+                      DisplayMemberPath="Name"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Group" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" 
+                      ItemsSource="{Binding Path=PscGroups, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Path=SelectedGroup}"
+                      DisplayMemberPath="Name"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="2" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+            <Label Content="Tool" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" 
+                      ItemsSource="{Binding Path=PscTools}"
+                      SelectedItem="{Binding Path=SelectedTool}"
+                      DisplayMemberPath="Name"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="top">
+            <TextBlock FontFamily = "Verdana" Foreground="White"
+                       LineHeight = "10" Width = "500"  
+                       TextWrapping = "Wrap" Margin = "25 4 4 4">
+                <Run FontSize = "15">Issue Categorization</Run> 
+                <LineBreak/>
+                Identify applicable categorizations.
+            </TextBlock>
+            <CheckBox Content="High Frequency" Foreground="White" Margin="30 5  0 5 "/>
+            <CheckBox Content="Critical" Foreground="White" Margin="30 5  0 5 "/>
+            <CheckBox Content="Clinical Flow" Foreground="White" Margin="30 5  0 5 "/>
+            <CheckBox Content="Service Flow" Foreground="White" Margin="30 5  0 5 "/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2"  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock FontFamily = "Verdana" Foreground="White"
+                       LineStackingStrategy = "MaxHeight" LineHeight = "10" Width = "500"  
+                       TextWrapping = "Wrap" Margin = "4 4 4 4">
+                <Run FontSize = "15">Issue Description</Run> 
+                <LineBreak/>
+                Describe the issue briefly. 
+            </TextBlock>
+            <TextBox Name="IssueTextBox" Height="120" 
+                     Margin="5"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Attach" Width="60" Height="20" Margin="3 3 3 3 "/>
+                <Button Content="Clear" Width="60" Margin="3 3 3 3"/>
+            </StackPanel>
+            
+</StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button Content="Submit" Width="80" Height="30" Margin="5 3 5 3 "/>
+            <Button Content="Cancel" Width="80" Height="30" Margin="5 3 5 3"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
